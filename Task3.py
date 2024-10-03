@@ -5,28 +5,38 @@ solr_url = "http://localhost:8983/solr/admin/collections"
 
 
 def getDepFact(collection_name):
-    emp=pysolr.Solr(f"http://localhost:8983/solr/{collection_name}/",always_commit=True)
+    emp=pysolr.Solr(f"http://localhost:8983/solr/{collection_name}")
 
     
-    facet_query = {
-        'facet': 'true',
-        'facet.field': 'Gender', 
-        'facet.mincount': 1,
-        'rows': 0  
+
+# Replace with your Solr server URL
+
+    # Create a Solr client object
+
+    # Define the facet query parameters
+    params = {
+        "facet": "true",
+        "facet.field": "Department"
     }
 
-    results = emp.search('*:*', **facet_query)
+    # Perform the facet query
 
-    if 'facet_counts' in results and 'facet_fields' in results['facet_counts']:
-        gender_counts = results['facet_counts']['facet_fields'].get('Gender', [])
-        if gender_counts:
-            print("Employee Count by Gender:")
-            for i in range(0, len(gender_counts), 2):
-                print(f"{gender_counts[i]}: {gender_counts[i + 1]}")
-        else:
-            print("No counts found for the specified facet field.")
+    # Extract the facet results
+    results = emp.search("*:*", params=params)
+
+    # Check if facet results are available
+    if 'facet_fields' in results.facets:
+        # Extract the facet results
+        facet_results = results.facets['facet_fields']['department']
+
+        # Print the facet results
+        for facet_value, count in facet_results:
+            print(f"Department: {facet_value}, Count: {count}")
     else:
-        print("No facet counts found.")
+        # Handle the case where facet results are not available
+        print("Facet results not found.")
+
+ 
     
         
 def delEmpById(collection_name,Emp_id):
@@ -102,26 +112,28 @@ def create_collection(collection_name):
 #creating collection
 v_nameCollection = input("Enter V_nameCollection name: ")
 v_phoneCollection = input("Enter V_phonecollection name: ")
-create_collection(v_nameCollection)
-create_collection(v_phoneCollection)
+# create_collection(v_nameCollection)
+# create_collection(v_phoneCollection)
 
-#Get Employee count
-getEmpCount(v_nameCollection)
+# #Get Employee count
+# getEmpCount(v_nameCollection)
 
-#Indexing data
-indexData(v_nameCollection,'Department')
-indexData(v_phoneCollection,'Gender')
+# #Indexing data
+# indexData(v_nameCollection,'Department')
+# indexData(v_phoneCollection,'Gender')
 
-#delete employe by id
-delEmpById(v_nameCollection,'E02003')
+# #delete employe by id
+# delEmpById(v_nameCollection,'E02003')
 
-#again get employee count
-getEmpCount(v_nameCollection)
+# #again get employee count
+# getEmpCount(v_nameCollection)
 
 
-#search by column name
-searchByColumn(v_nameCollection,'Department','IT')
-searchByColumn(v_nameCollection,'Gender','Male')
-searchByColumn(v_phoneCollection,'Department','IT')
+# #search by column name
+# searchByColumn(v_nameCollection,'Department','IT')
+# searchByColumn(v_nameCollection,'Gender','Male')
+# searchByColumn(v_phoneCollection,'Department','IT')
 
-# getDepFact(collection_name)
+# getDepFact
+# getDepFact(v_nameCollection)
+getDepFact(v_phoneCollection)
