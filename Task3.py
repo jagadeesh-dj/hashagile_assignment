@@ -112,28 +112,28 @@ def create_collection(collection_name):
 #creating collection
 v_nameCollection = input("Enter V_nameCollection name: ")
 v_phoneCollection = input("Enter V_phonecollection name: ")
-# create_collection(v_nameCollection)
-# create_collection(v_phoneCollection)
+create_collection(v_nameCollection)
+create_collection(v_phoneCollection)
 
-# #Get Employee count
-# getEmpCount(v_nameCollection)
+#Get Employee count
+getEmpCount(v_nameCollection)
 
-# #Indexing data
-# indexData(v_nameCollection,'Department')
-# indexData(v_phoneCollection,'Gender')
+#Indexing data
+indexData(v_nameCollection,'Department')
+indexData(v_phoneCollection,'Gender')
 
-# #delete employe by id
-# delEmpById(v_nameCollection,'E02003')
+#delete employe by id
+delEmpById(v_nameCollection,'E02003')
 
-# #again get employee count
-# getEmpCount(v_nameCollection)
+#again get employee count
+getEmpCount(v_nameCollection)
 
 
-# #search by column name
-# searchByColumn(v_nameCollection,'Department','IT')
-# searchByColumn(v_nameCollection,'Gender','Male')
-# searchByColumn(v_phoneCollection,'Department','IT')
+#search by column name
+searchByColumn(v_nameCollection,'Department','IT')
+searchByColumn(v_nameCollection,'Gender','Male')
+searchByColumn(v_phoneCollection,'Department','IT')
 
-# getDepFact
-# getDepFact(v_nameCollection)
+getDepFact
+getDepFact(v_nameCollection)
 getDepFact(v_phoneCollection)
